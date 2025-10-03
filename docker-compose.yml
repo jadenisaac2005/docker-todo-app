@@ -1,0 +1,38 @@
+# Specify the Docker Compose file format version
+version: '3.8'
+
+# Define the services (containers) that make up our app
+services:
+  # The service for our Node.js application
+  app:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    # Map port 3000 on our computer to port 3000 in the container
+    ports:
+      - "3000:3000"
+    # Pass environment variables to the container
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=mysecretpassword
+      - DB_NAME=todos
+    # Make sure the 'db' service starts before the 'app' service
+    depends_on:
+      - db
+
+  # The service for our PostgreSQL database
+  db:
+    # Use the official PostgreSQL 14 image from Docker Hub
+    image: postgres:14-alpine
+    # Create a persistent volume to store database data
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    # Pass environment variables needed to initialize the database
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=todos
+
+# Define the volume to be managed by Docker
+volumes:
+  db-data:
