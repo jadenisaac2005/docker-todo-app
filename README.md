@@ -30,7 +30,7 @@ You must have the following software installed:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/docker-todo-app.git](https://github.com/your-username/docker-todo-app.git)
+    git clone [https://github.com/jadenisaac2005/docker-todo-app.git](https://github.com/jadenisaac2005/docker-todo-app.git)
     ```
 
 2.  **Navigate to the project directory:**
